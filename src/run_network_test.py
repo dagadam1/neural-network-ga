@@ -7,10 +7,9 @@ mini_batch_size = 10
 eta = 3.0
 
 random_seed = 31415
-network.random.seed(random_seed)
-network.np.random.seed(random_seed)
-
-training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+def reset_random():
+    network.random.seed(random_seed)
+    network.np.random.seed(random_seed)
 
 def train_net(hidden_layer_size):
     """Train a network consitsting of one input layer with 784 neurons,
@@ -20,15 +19,21 @@ def train_net(hidden_layer_size):
     Args:
         hidden_layer_size (int): number of neurons in the hidden layer
     """
+    reset_random()
+    training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
     
+    print(f"#Network size: [784, {hidden_layer_size}, 10]")
     net = network.Network([784, hidden_layer_size, 10])
     net.SGD(training_data, epochs, mini_batch_size, eta, test_data=test_data)
-    
-    print(net)
+    print(f"Final epoch completed! \nWeights: {net.weights} \nBiases: {net.biases}")
+    print("#.")
 
 def main():
-
+    print(f"#Running networks. Random seed: {random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
+    train_net(5)
     train_net(30)
+    train_net(100)
+    
     
 if __name__ == "__main__":
     main()
