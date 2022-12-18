@@ -10,6 +10,8 @@ random_seed = 31415
 network.random.seed(random_seed)
 network.np.random.seed(random_seed)
 
+training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+
 def train_net(hidden_layer_size):
     """Train a network consitsting of one input layer with 784 neurons,
     one output layer with 10 neurons, and one hidden layer
@@ -25,8 +27,6 @@ def train_net(hidden_layer_size):
     print(net)
 
 def main():
-    
-    training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 
     train_net(30)
     
