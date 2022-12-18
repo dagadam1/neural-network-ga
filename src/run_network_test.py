@@ -21,7 +21,14 @@ def train_net(hidden_layer_size):
     
     net = network.Network([784, hidden_layer_size, 10])
     net.SGD(training_data, epochs, mini_batch_size, eta, test_data=test_data)
+    
+    print(net)
 
-training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+def main():
+    
+    training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 
-train_net(30)
+    train_net(30)
+    
+if __name__ == "__main__":
+    main()
