@@ -12,7 +12,7 @@ def reset_random():
     network.np.random.seed(random_seed)
 
 def train_net(hidden_layer_size):
-    """Train a network consitsting of one input layer with 784 neurons,
+    """Train a network consisting of one input layer with 784 neurons,
     one output layer with 10 neurons, and one hidden layer
     with 'hidden_layer_size' neurons.
 
