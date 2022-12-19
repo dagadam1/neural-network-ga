@@ -6,10 +6,11 @@ epochs = 30
 mini_batch_size = 10
 eta = 3.0
 
-random_seed = 31415
+parameters_random_seed = 27182
+data_random_seed = 31415
 def reset_random():
-    network.random.seed(random_seed)
-    network.np.random.seed(random_seed)
+    network.random.seed(data_random_seed)
+    network.np.random.seed(parameters_random_seed)
 
 def train_net(hidden_layer_size):
     """Train a network consitsting of one input layer with 784 neurons,
@@ -29,7 +30,7 @@ def train_net(hidden_layer_size):
     print("#.")
 
 def main():
-    print(f"#Running networks. Random seed: {random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
+    print(f"#Running networks. Random seed data: {data_random_seed} Random seed parameters: {parameters_random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
     train_net(5)
     train_net(10)
     train_net(30)
