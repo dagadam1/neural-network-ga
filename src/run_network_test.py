@@ -2,11 +2,11 @@ import network
 import mnist_loader
 
 # Hyper-parameters
-epochs = 30
+epochs = 50
 mini_batch_size = 10
-eta = 3.0
+eta = 4.0
 
-parameters_random_seed = 27182
+parameters_random_seed = 31415
 data_random_seed = 31415
 def reset_random():
     network.random.seed(data_random_seed)
@@ -31,13 +31,13 @@ def train_net(hidden_layer_size):
 
 def main():
     print(f"#Running networks. Random seed data: {data_random_seed} Random seed parameters: {parameters_random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
-    train_net(5)
-    train_net(10)
-    train_net(30)
-    train_net(50)
-    train_net(70)
-    train_net(90)
-    train_net(120)
+    # train_net(5)
+    # train_net(10)
+    # train_net(30)
+    # train_net(50)
+    # train_net(70)
+    # train_net(90)
+    # train_net(120)
     train_net(784)
     
     
