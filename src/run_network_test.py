@@ -1,5 +1,6 @@
 import network
 import mnist_loader
+from time import process_time
 
 # Hyper-parameters
 epochs = 50
@@ -13,6 +14,13 @@ data_seeds = [9378532, 5329960, 5517929, 6653044, 5284670, 1346193, 4037161, 449
 def reset_random(parameters_seed, data_seed):
     network.random.seed(data_random_seed)
     network.np.random.seed(parameters_random_seed)
+    
+def timer(function):
+    start = process_time()
+    func_return = function()
+    stop = process_time()
+    return func_return, stop - start
+    
 
 def train_net(hidden_layer_size):
     """Train a network consisting of one input layer with 784 neurons,
