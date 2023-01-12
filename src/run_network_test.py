@@ -11,7 +11,7 @@ parameter_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380
 
 data_seeds = [9378532, 5329960, 5517929, 6653044, 5284670, 1346193, 4037161, 4498556, 8215724, 3467963]
 
-def reset_random(parameters_seed, data_seed):
+def seed_random(parameters_seed, data_seed):
     network.random.seed(data_random_seed)
     network.np.random.seed(parameters_random_seed)
     
@@ -30,7 +30,7 @@ def train_net(hidden_layer_size):
     Args:
         hidden_layer_size (int): number of neurons in the hidden layer
     """
-    reset_random()
+    seed_random()
     training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
     
     print(f"#Network size: [784, {hidden_layer_size}, 10]")
