@@ -6,9 +6,11 @@ epochs = 50
 mini_batch_size = 10
 eta = 4.0
 
-parameters_random_seed = 31415
-data_random_seed = 31415
-def reset_random():
+parameter_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380, 3010278, 753857, 6842634]
+
+data_seeds = [9378532, 5329960, 5517929, 6653044, 5284670, 1346193, 4037161, 4498556, 8215724, 3467963]
+
+def reset_random(parameters_seed, data_seed):
     network.random.seed(data_random_seed)
     network.np.random.seed(parameters_random_seed)
 
