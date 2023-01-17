@@ -3,9 +3,13 @@ import mnist_loader
 from time import process_time
 
 # Hyper-parameters
-epochs = 50
+epochs = 2#50
 mini_batch_size = 10
 eta = 4.0
+
+runs = 5
+
+networks_to_test = [5, 10, 30, 50, 70, 90, 120, 784]
 
 parameters_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380, 3010278, 753857, 6842634]
 
@@ -30,7 +34,7 @@ def timer(function, *args):
     return (func_return, stop - start)
     
 
-def train_net(hidden_layer_size):
+def train_net(hidden_layer_size, parameters_seed, data_seed):
     """Train a network consisting of one input layer with 784 neurons,
     one output layer with 10 neurons, and one hidden layer
     with 'hidden_layer_size' neurons.
@@ -38,7 +42,7 @@ def train_net(hidden_layer_size):
     Args:
         hidden_layer_size (int): number of neurons in the hidden layer
     """
-    seed_random()
+    seed_random(parameters_seed, data_seed)
     training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
     
     print(f"#Network size: [784, {hidden_layer_size}, 10]")
@@ -48,15 +52,21 @@ def train_net(hidden_layer_size):
     print("#.")
 
 def main():
-    print(f"#Running networks. Random seed data: {data_random_seed} Random seed parameters: {parameters_random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
-    train_net(5)
-    train_net(10)
-    train_net(30)
-    train_net(50)
-    train_net(70)
-    train_net(90)
-    train_net(120)
-    train_net(784)
+    assert len(parameters_seeds) >= runs and len(data_seeds) >= runs, f"Not enough seeds for {runs} runs!"
+    
+    for i in range(runs):
+        
+        current_parameters_seed = parameters_seeds.pop()
+        current_data_seed = data_seeds.pop()
+        print(f"\
+##Running networks. Run nr. {i+1}/{runs}. \
+Current random seed data: {current_data_seed} Current random seed parameters: {current_parameters_seed} \
+Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
+        
+        for size in networks_to_test:
+            print(f"(Time: {timer(train_net, size, current_parameters_seed, current_data_seed)[1]})") 
+        
+        print("##.")
     
     
 if __name__ == "__main__":
