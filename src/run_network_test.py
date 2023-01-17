@@ -7,19 +7,27 @@ epochs = 50
 mini_batch_size = 10
 eta = 4.0
 
-parameter_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380, 3010278, 753857, 6842634]
+parameters_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380, 3010278, 753857, 6842634]
 
 data_seeds = [9378532, 5329960, 5517929, 6653044, 5284670, 1346193, 4037161, 4498556, 8215724, 3467963]
 
 def seed_random(parameters_seed, data_seed):
-    network.random.seed(data_random_seed)
-    network.np.random.seed(parameters_random_seed)
+    network.random.seed(data_seed)
+    network.np.random.seed(parameters_seed)
     
-def timer(function):
+def timer(function, *args):
+    """Runs a function and measures the time it takes.
+
+    Args:
+        function (callable): The function to run.
+
+    Returns:
+        (func_return, time) (any, num): 'func_return' is the return value of the funtion. 'time' is the time it took to run.
+    """
     start = process_time()
-    func_return = function()
+    func_return = function(*args)
     stop = process_time()
-    return func_return, stop - start
+    return (func_return, stop - start)
     
 
 def train_net(hidden_layer_size):
@@ -41,13 +49,13 @@ def train_net(hidden_layer_size):
 
 def main():
     print(f"#Running networks. Random seed data: {data_random_seed} Random seed parameters: {parameters_random_seed} Global hyper-parameters: epochs = {epochs}, mini_batch_size = {mini_batch_size}, eta = {eta}")
-    # train_net(5)
-    # train_net(10)
-    # train_net(30)
-    # train_net(50)
-    # train_net(70)
-    # train_net(90)
-    # train_net(120)
+    train_net(5)
+    train_net(10)
+    train_net(30)
+    train_net(50)
+    train_net(70)
+    train_net(90)
+    train_net(120)
     train_net(784)
     
     
