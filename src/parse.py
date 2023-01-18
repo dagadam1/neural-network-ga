@@ -16,10 +16,10 @@ def find_max_epoch_value(net: str):
     #First line is network size so take everything except it
     epochs = epochs_str.splitlines()[1:]
     
-    for epoch in epochs:
-        epoch.
+    
+    epoch_values = [int(epoch.split(" ")[2]) for epoch in epochs]
         
-    return net
+    return max(epoch_values)
     
 
 
@@ -30,7 +30,7 @@ def main():
     chunks = content.split("#")
     #Remove unnecessary lines
     nets = [i for i in chunks if i != ".\n" and i != ""]
-    find_max_epoch(nets[1])
+    print(find_max_epoch_value(nets[1]))
     
     
     
