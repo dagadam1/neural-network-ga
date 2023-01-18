@@ -13,7 +13,7 @@ def find_max_epoch_value(net: str):
     
     #Only keep everything before "Final epoch completed!"
     epochs_str = net.split("Final epoch completed!")[0]
-    #First line is network size so take everything except it
+    #First line is network size so keep everything except it
     epochs = epochs_str.splitlines()[1:]
     
     
@@ -29,8 +29,11 @@ def main():
     content = f.read()
     chunks = content.split("#")
     #Remove unnecessary lines
-    nets = [i for i in chunks if i != ".\n" and i != ""]
-    print(find_max_epoch_value(nets[1]))
+    nets = [i for i in chunks if i != ".\n" and i != ""][1:]
+    for net in nets:
+        #Print first line i.e. the size of the network
+        print(net.split('\n', 1)[0])
+        print(find_max_epoch_value(net))
     
     
     
