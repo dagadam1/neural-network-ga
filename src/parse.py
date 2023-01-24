@@ -24,6 +24,9 @@ def find_max_epoch_value(net: str):
 
 
 def main():
+    #List of every run as a dictionary cotaining all the networks and their highest epochs.
+    summary: list[dict[str, int]] =[]
+    
     filename = sys.argv[1]
     f = open(filename)
     content = f.read()
@@ -42,14 +45,22 @@ def main():
         #Only keep necessary lines and remove dots, for example
         nets = [i for i in chunks if i != ".\n" and i != ""][1:]
         for net in nets:
-            #Some of the lines in 'nets' are the timers from the previous net
-            #Check if this line is a timer and if so, print it and continue
+            #Some of the lines in 'nets' are timers
+            #Check if this line is a timer and if so, print it and continue to the next line
             if net.find("(Time: ") != -1:
                 print(net[2:])
                 continue
             
-            #Print first line i.e. the size of the network
-            print(net.split('\n', 1)[0])
+            #Find the first line i.e. the size of the network 
+            size = net.split('\n', 1)[0]
+            
+            #Find highest epoch
+            max_epoch_value = find_max_epoch_value(net)
+            
+            #Add this network's highest epoch to the summary
+            summary.append({size: max_epoch_value})
+            
+            print(size)
             print(find_max_epoch_value(net))
     
     
