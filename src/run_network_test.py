@@ -3,14 +3,15 @@ import mnist_loader
 from time import process_time
 
 # Hyper-parameters
-epochs = 2#50
+epochs = 50
 mini_batch_size = 10
-eta = 4.0
+eta = 4.0 # eta = learning_rate
 
 runs = 5
 
 networks_to_test = [5, 10, 30, 50, 70, 90, 120, 784]
 
+#The seeds are "popped" from these lists. That means the seeds at the ends will be used first.
 parameters_seeds = [8323988, 6856221, 3484827, 2202620, 3325501, 3909291, 3738380, 3010278, 753857, 6842634]
 
 data_seeds = [9378532, 5329960, 5517929, 6653044, 5284670, 1346193, 4037161, 4498556, 8215724, 3467963]
