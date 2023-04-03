@@ -64,7 +64,8 @@ def main():
             print(size)
             print(find_max_epoch_value(net))
     
-    print(summary)
+    for i, j in summary.items():
+        print(f"{i}\n{j}\n")
     
 
 if __name__ == "__main__":
